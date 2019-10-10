@@ -1,0 +1,2 @@
+class Fridge < Entity
+end

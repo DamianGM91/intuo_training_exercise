@@ -1,0 +1,2 @@
+class Food < Entity
+end

@@ -1,0 +1,2 @@
+class Pet < Entity
+end
