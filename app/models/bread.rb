@@ -1,0 +1,2 @@
+class Bread < Food
+end

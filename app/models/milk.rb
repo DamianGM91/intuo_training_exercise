@@ -1,0 +1,2 @@
+class Milk < Food
+end
