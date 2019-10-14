@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-	has_one :fridge, class_name: "Fridge", dependent: :destroy
-	has_many :pets, class_name: "Pet", dependent: :destroy
+	has_one :fridge, class_name: "Fridge", dependent: :destroy, foreign_key: "owner_id"
+	has_many :pets, class_name: "Pet", dependent: :destroy, foreign_key: "owner_id"
 
 	before_create :downcase_email
 	before_save :validate_date_of_birth
