@@ -2,13 +2,10 @@ class User < ApplicationRecord
 	has_one :fridge, class_name: "Fridge", dependent: :destroy, foreign_key: "owner_id"
 	has_many :pets, class_name: "Pet", dependent: :destroy, foreign_key: "owner_id"
 
-	before_create :downcase_email
-	before_save :validate_date_of_birth
-	before_update :validate_date_of_birth
-	before_save :validate_pet_count
-	before_update :validate_date_of_birth
-	before_save :validate_age_for_fridge
-	before_update :validate_age_for_fridge
+	after_validation :downcase_email
+	after_validation :validate_date_of_birth
+	after_validation :validate_pet_count
+	after_validation :validate_age_for_fridge
 
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i.freeze
   validates :first_name, presence: true, length: {maximum: 50}
@@ -21,7 +18,7 @@ class User < ApplicationRecord
   end
 
   def validate_date_of_birth
-  	if self.date_of_birth > Date.today
+  	if self.date_of_birth != nil && self.date_of_birth > Date.today
   		errors.add(:date_of_birth, "The date of birth can't be set in the future.")
   	end
   end

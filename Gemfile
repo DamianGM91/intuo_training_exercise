@@ -6,6 +6,10 @@ ruby '2.6.3'
 # Active Model Serializers gem
 gem 'active_model_serializers', '~> 0.10.0'
 
+# Pagination gems
+gem 'will_paginate'
+gem 'api-pagination'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
 # Use postgresql as the database for Active Record

@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::Base
-	def json_test
-		user = {:first_name => "Damián", last_name: "González", date_of_birth: Time.parse('1991-12-31 11am').in_time_zone('Madrid')}
-		render json: user
-	end
+	include Rails::Pagination
+
+	protect_from_forgery with: :null_session # Disable CSRF for requests to make API work.
+
+	rescue_from ActiveRecord::RecordNotFound, :with => :not_found
+
+  def not_found
+    render json: {:error => "Resource not found."}, :status => 404
+  end
 end
