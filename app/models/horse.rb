@@ -1,3 +1,3 @@
 class Horse < Pet
-	validates_inclusion_of :favorite_food, :in => %w(carrot grass water), :message => "Horse foods are restricted to carrot, grass and water."
+	validates_inclusion_of :favorite_food, :in => %w(Carrot Grass Water), :message => "Horse foods are restricted to Carrot, Grass and Water."
 end

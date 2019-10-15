@@ -27,7 +27,9 @@ class UsersController < ApplicationController
 
 	def update
 		user = User.find(params[:id])
-		if user.update_attributes(allowed_params)
+		if allowed_params.empty?
+			render json: {:message => "No parameters were submitted in the request."}, adapter: :json
+		elsif user.update_attributes(allowed_params)
 			render json: {:message => "User updated", :data => user.reload}, adapter: :json
 		else
 			render json: {:message => "The user could not be updated.", :errors => user.errors}, adapter: :json

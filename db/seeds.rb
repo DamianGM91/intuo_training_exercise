@@ -1,13 +1,13 @@
 def assign_favorite_food(pet_type)
 	favorite_food = ""
 	if pet_type == "Cat"
-		favorite_food = %w(milk water bread).sample
+		favorite_food = %w(Milk Water Bread).sample
 	elsif pet_type == "Dog"
-		favorite_food = %w(water meat).sample
+		favorite_food = %w(Water Meat).sample
 	elsif pet_type == "Horse"
-		favorite_food = %w(carrot grass water).sample
+		favorite_food = %w(Carrot Grass Water).sample
 	elsif pet_type == "Mouse"
-		favorite_food = %w(water cheese).sample
+		favorite_food = %w(Water Cheese).sample
 	end
 end
 
@@ -38,13 +38,13 @@ end
 def add_food_to_fridge(user)
 	fridge = Fridge.find_by(owner_id: user.id)
 	if fridge != nil
-		foods = %w(Milk Water Bread Meat Carrot Grass)
+		foods = %w(Milk Water Bread Meat Carrot Grass Cheese)
 		(1..10).to_a.sample.times do
 			random_food = foods.sample
 			random_food.constantize.create(
 				fridge_id: fridge.id,
-				expiration_date: %w(Milk Bread Meat Carrot).include?(random_food) ? Faker::Date.forward(days: 3) : nil,
-				brand: %w(Milk Bread Meat Carrot).include?(random_food) ? %w(cheap expensive).sample : nil,
+				expiration_date: %w(Milk Bread Meat Carrot Cheese).include?(random_food) ? Faker::Date.forward(days: 3) : nil,
+				brand: %w(Milk Bread Meat Carrot Cheese).include?(random_food) ? %w(cheap expensive).sample : nil,
 				volume: random_food == "Milk" ? %w(0.5 1).sample : nil,
 				size: random_food == "Bread" ? %w(big small).sample : nil,
 				color: random_food == "Carrot" ? %w(orange purple white).sample : nil 
