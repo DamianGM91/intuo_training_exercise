@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   get "/users/last_name/:last_name", to: "users#find_by_last_name"
   resources :pets
   get "/pets/name/:name", to: "pets#find_by_name"
+  get "/pets/type/:type", to: "pets#find_by_type"
 end

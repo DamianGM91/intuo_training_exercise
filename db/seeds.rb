@@ -44,10 +44,10 @@ def add_food_to_fridge(user)
 			random_food.constantize.create(
 				fridge_id: fridge.id,
 				expiration_date: %w(Milk Bread Meat Carrot Cheese).include?(random_food) ? Faker::Date.forward(days: 3) : nil,
-				brand: %w(Milk Bread Meat Carrot Cheese).include?(random_food) ? %w(cheap expensive).sample : nil,
+				brand: %w(Milk Bread Meat Carrot Cheese).include?(random_food) ? %w(Cheap Expensive).sample : nil,
 				volume: random_food == "Milk" ? %w(0.5 1).sample : nil,
-				size: random_food == "Bread" ? %w(big small).sample : nil,
-				color: random_food == "Carrot" ? %w(orange purple white).sample : nil 
+				size: random_food == "Bread" ? %w(Big Small).sample : nil,
+				color: random_food == "Carrot" ? %w(Orange Purple White).sample : nil 
 			)
 		end
 	end

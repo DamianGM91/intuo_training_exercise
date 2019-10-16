@@ -11,6 +11,10 @@ class PetsController < ApplicationController
 		render json: Pet.find_by(name: params[:name]), adapter: :json
 	end
 
+	def find_by_type
+		render json: Pet.where(type: params[:type]).all, adapter: :json
+	end
+
 	def create
 		pet = Pet.new(allowed_params)
 		if pet.save
