@@ -8,19 +8,24 @@ class PetsController < ApplicationController
 	end
 
 	def find_by_name
-		render json: Pet.find_by(name: params[:name]), adapter: :json
+		render json: Pet.find_by(name: check_lowercase_params(params[:name])), adapter: :json
 	end
 
 	def find_by_type
-		render json: Pet.where(type: params[:type]).all, adapter: :json
+		render json: Pet.where(type: check_lowercase_params(params[:type])), adapter: :json
 	end
 
 	def create
-		pet = Pet.new(allowed_params)
-		if pet.save
-			render json: {:message => "Pet created", :data => pet.reload}, adapter: :json
+		if %w(Cat Dog Horse Mouse).include?(check_lowercase_params(params[:type]))
+			params[:type] = check_lowercase_params(params[:type])
+			pet = Pet.new(allowed_params)
+			if pet.save
+				render json: {:message => "Pet created", :data => pet.reload}, adapter: :json
+			else
+				render json: {:message => "The pet could not be created.", :errors => pet.errors}, adapter: :json
+			end
 		else
-			render json: {:message => "The pet could not be created.", :errors => pet.errors}, adapter: :json
+			render json: {:message => "Valid pets are restricted to Cat, Dog, Horse and Mouse."}, adapter: :json
 		end
 	end
 

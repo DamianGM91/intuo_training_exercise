@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   resources :pets
   get "/pets/name/:name", to: "pets#find_by_name"
   get "/pets/type/:type", to: "pets#find_by_type"
+  resources :foods
+  get "/foods/type/:type", to: "foods#find_by_type"
 end

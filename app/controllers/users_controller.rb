@@ -9,11 +9,11 @@ class UsersController < ApplicationController
 	end
 
 	def find_by_first_name
-		render json: User.find_by(first_name: params[:first_name]), adapter: :json
+		render json: User.find_by(first_name: check_lowercase_params(params[:first_name])), adapter: :json
 	end
 
 	def find_by_last_name
-		render json: User.find_by(last_name: params[:last_name]), adapter: :json
+		render json: User.find_by(last_name: check_lowercase_params(params[:last_name])), adapter: :json
 	end
 
 	def create

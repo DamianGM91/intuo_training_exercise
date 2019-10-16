@@ -3,6 +3,7 @@ class User < ApplicationRecord
 	has_many :pets, class_name: "Pet", dependent: :destroy, foreign_key: "owner_id"
 
 	after_validation :downcase_email
+  after_validation :upcase_name
 	after_validation :validate_date_of_birth
 	after_validation :validate_pet_count
 	after_validation :validate_age_for_fridge
@@ -15,6 +16,11 @@ class User < ApplicationRecord
 
   def downcase_email
     self.email = email.downcase
+  end
+
+  def upcase_name
+    self.first_name = first_name.capitalize
+    self.last_name = last_name.capitalize
   end
 
   def validate_date_of_birth

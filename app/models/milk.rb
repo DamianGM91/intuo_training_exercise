@@ -4,5 +4,5 @@ class Milk < Food
 	validates :brand, presence: true
 	validates_inclusion_of :brand, :in => %w(Cheap Expensive), :message => "The options for brand are only Cheap and Expensive." 
 	validates :volume, presence: true
-	validates_inclusion_of :volume, :in => 0.5..1, :message => "Milk volume has to be in between 0.5 and 1 liters."
+	validates_inclusion_of :volume, :in => 0.5..1, :message => "Milk volume has to be between 0.5 and 1 liters."
 end

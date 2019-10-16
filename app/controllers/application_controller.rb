@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
   def not_found
     render json: {:error => "Resource not found."}, :status => 404
   end
+
+  def check_lowercase_params(params)
+  	params == params.downcase ? params.capitalize : params
+  end
 end
