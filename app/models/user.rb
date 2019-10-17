@@ -15,12 +15,12 @@ class User < ApplicationRecord
   validates :date_of_birth, presence: true
 
   def downcase_email
-    self.email = email.downcase
+    self.email = email.downcase unless self.email == nil
   end
 
   def upcase_name
-    self.first_name = first_name.capitalize
-    self.last_name = last_name.capitalize
+    self.first_name = first_name.capitalize unless self.first_name == nil
+    self.last_name = last_name.capitalize unless self.last_name == nil
   end
 
   def validate_date_of_birth

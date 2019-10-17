@@ -1,18 +1,18 @@
 class PetsController < ApplicationController
 	def index
-		render json: Pet.all, adapter: :json
+		if params.include?(:type) && params.include?(:name)
+			render json: Pet.find_by(type: check_lowercase_params(params[:type]), name: check_lowercase_params(params[:name])), adapter: :json
+		elsif params.include?(:name)
+			render json: Pet.find_by(name: check_lowercase_params(params[:name])), adapter: :json
+		elsif params.include?(:type)
+			render json: Pet.where(type: check_lowercase_params(params[:type])).all, adapter: :json
+		else
+			render json: Pet.all, adapter: :json
+		end
 	end
 
 	def show
 		render json: Pet.find(params[:id]), adapter: :json
-	end
-
-	def find_by_name
-		render json: Pet.find_by(name: check_lowercase_params(params[:name])), adapter: :json
-	end
-
-	def find_by_type
-		render json: Pet.where(type: check_lowercase_params(params[:type])), adapter: :json
 	end
 
 	def create

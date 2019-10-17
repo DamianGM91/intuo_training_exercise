@@ -1,14 +1,18 @@
 class FoodsController < ApplicationController
 	def index
-		render json: Food.all, adapter: :json
+		if params.include?(:brand) && params.include?(:type)
+			render json: Food.where(type: check_lowercase_params(params[:type]), brand: check_lowercase_params(params[:brand])).all, adapter: :json
+		elsif params.include?(:brand)
+			render json: Food.where(brand: check_lowercase_params(params[:brand])).all, adapter: :json
+		elsif params.include?(:type)
+			render json: Food.where(type: check_lowercase_params(params[:type])).all, adapter: :json
+		else
+			render json: Food.all, adapter: :json
+		end
 	end
 
 	def show
 		render json: Food.find(params[:id]), adapter: :json
-	end
-
-	def find_by_type
-		render json: Food.where(type: check_lowercase_params(params[:type])).all, adapter: :json
 	end
 
 	def create

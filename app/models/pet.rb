@@ -11,6 +11,6 @@ class Pet < ApplicationRecord
   validates :owner_id, presence: true
 
   def upcase_name
-    self.name = name.capitalize
+    self.name = name.capitalize unless self.name == nil
   end
 end

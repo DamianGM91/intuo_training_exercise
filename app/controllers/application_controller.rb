@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_lowercase_params(params)
+  	return if params == nil
   	params == params.downcase ? params.capitalize : params
   end
 end
