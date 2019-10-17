@@ -8,4 +8,11 @@ Rails.application.routes.draw do
   resources :cats
   resources :horses
   resources :mice
+  resources :breads
+  resources :carrots
+  resources :cheeses
+  resources :grasses
+  resources :meats
+  resources :milks
+  resources :waters
 end

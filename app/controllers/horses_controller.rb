@@ -1,9 +1,9 @@
 class HorsesController < ApplicationController
 	def index
-		if params.include?(:name)
-			render json: Horse.find_by(name: check_lowercase_params(params[:name])), adapter: :json
+		if request.query_parameters.empty?
+			render json: Horse.all, each_serializer: HorseSerializer, adapter: :json
 		else
-			render json: Horse.all, adapter: :json
+			render json: Horse.where(check_lowercase_queries(request.query_parameters)).all, each_serializer: HorseSerializer, adapter: :json
 		end
 	end
 

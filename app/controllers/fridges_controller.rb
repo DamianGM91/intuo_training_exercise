@@ -1,9 +1,9 @@
 class FridgesController < ApplicationController
 	def index
-		if params.include?(:brand)
-			render json: Fridge.where(brand: check_lowercase_params(params[:brand])).all, adapter: :json
+		if request.query_parameters.empty?
+			render json: Fridge.all, each_serializer: FridgeSerializer, adapter: :json
 		else
-			render json: Fridge.all, adapter: :json
+			render json: Fridge.where(check_lowercase_queries(request.query_parameters)).all, each_serializer: FridgeSerializer, adapter: :json
 		end
 	end
 

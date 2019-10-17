@@ -1,9 +1,9 @@
 class DogsController < ApplicationController
 	def index
-		if params.include?(:name)
-			render json: Dog.find_by(name: check_lowercase_params(params[:name])), adapter: :json
+		if request.query_parameters.empty?
+			render json: Dog.all, each_serializer: DogSerializer, adapter: :json
 		else
-			render json: Dog.all, adapter: :json
+			render json: Dog.where(check_lowercase_queries(request.query_parameters)).all, each_serializer: DogSerializer, adapter: :json
 		end
 	end
 

@@ -1,0 +1,2 @@
+class CarrotsController < ApplicationController
+end

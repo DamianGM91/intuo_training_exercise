@@ -1,14 +1,10 @@
 class UsersController < ApplicationController
 	def index
 		# paginate json: User.all, per_page: 25, adapter: :json_api
-		if params.include?(:first_name) && params.include?(:last_name)
-			render json: User.find_by(first_name: check_lowercase_params(params[:first_name]), last_name: check_lowercase_params(params[:last_name])), adapter: :json
-		elsif params.include?(:first_name)
-			render json: User.find_by(first_name: check_lowercase_params(params[:first_name])), adapter: :json
-		elsif params.include?(:last_name)
-			render json: User.find_by(last_name: check_lowercase_params(params[:last_name])), adapter: :json
+		if request.query_parameters.empty?
+			render json: User.all, each_serializer: UserSerializer, adapter: :json
 		else
-			render json: User.all, adapter: :json
+			render json: User.where(check_lowercase_queries(request.query_parameters)).all, each_serializer: UserSerializer, adapter: :json
 		end
 	end
 

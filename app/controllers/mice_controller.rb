@@ -1,9 +1,9 @@
 class MiceController < ApplicationController
 	def index
-		if params.include?(:name)
-			render json: Mouse.find_by(name: check_lowercase_params(params[:name])), adapter: :json
+		if request.query_parameters.empty?
+			render json: Mouse.all, each_serializer: MouseSerializer, adapter: :json
 		else
-			render json: Mouse.all, adapter: :json
+			render json: Mouse.where(check_lowercase_queries(request.query_parameters)).all, each_serializer: MouseSerializer, adapter: :json
 		end
 	end
 

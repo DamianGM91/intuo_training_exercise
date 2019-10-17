@@ -1,0 +1,2 @@
+module GrassesHelper
+end

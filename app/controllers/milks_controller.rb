@@ -1,0 +1,2 @@
+class MilksController < ApplicationController
+end

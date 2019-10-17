@@ -1,9 +1,9 @@
 class CatsController < ApplicationController
 	def index
-		if params.include?(:name)
-			render json: Cat.find_by(name: check_lowercase_params(params[:name])), adapter: :json
+		if request.query_parameters.empty?
+			render json: Cat.all, each_serializer: CatSerializer, adapter: :json
 		else
-			render json: Cat.all, adapter: :json
+			render json: Cat.where(check_lowercase_queries(request.query_parameters)).all, each_serializer: CatSerializer, adapter: :json
 		end
 	end
 
