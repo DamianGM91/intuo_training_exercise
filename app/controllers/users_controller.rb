@@ -30,7 +30,7 @@ class UsersController < ApplicationController
 		if allowed_params.empty?
 			render json: {:message => "No parameters were submitted in the request."}, adapter: :json
 		elsif user.update_attributes(allowed_params)
-			render json: {:message => "User updated", :data => user.reload}, adapter: :json
+			render json: {:message => "User updated.", :data => user.reload}, adapter: :json
 		else
 			render json: {:message => "The user could not be updated.", :errors => user.errors}, adapter: :json
 		end
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 
 	def destroy
 		if User.find(params[:id]).destroy
-			render json: {:message => "User deleted"}, adapter: :json
+			render json: {:message => "User deleted."}, adapter: :json
 		end
 	end
 

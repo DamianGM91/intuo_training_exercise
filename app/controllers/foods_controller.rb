@@ -20,7 +20,7 @@ class FoodsController < ApplicationController
 			params[:type] = check_lowercase_params(params[:type])
 			food = Food.new(allowed_params)
 			if food.save
-				render json: {:message => "Food created", :data => food.reload}, adapter: :json
+				render json: {:message => "Food created.", :data => food.reload}, adapter: :json
 			else
 				render json: {:message => "The food could not be created.", :errors => food.errors}, adapter: :json
 			end
@@ -34,7 +34,7 @@ class FoodsController < ApplicationController
 		if allowed_params.empty?
 			render json: {:message => "No parameters were submitted in the request."}, adapter: :json
 		elsif food.update_attributes(allowed_params)
-			render json: {:message => "Food updated", :data => food.reload}, adapter: :json
+			render json: {:message => "Food updated.", :data => food.reload}, adapter: :json
 		else
 			render json: {:message => "The food could not be updated.", :errors => food.errors}, adapter: :json
 		end
@@ -42,7 +42,7 @@ class FoodsController < ApplicationController
 
 	def destroy
 		if Food.find(params[:id]).destroy
-			render json: {:message => "Food deleted"}, adapter: :json
+			render json: {:message => "Food deleted."}, adapter: :json
 		end
 	end
 

@@ -4,4 +4,8 @@ Rails.application.routes.draw do
   resources :pets
   resources :foods
   resources :fridges
+  resources :dogs
+  resources :cats
+  resources :horses
+  resources :mice
 end

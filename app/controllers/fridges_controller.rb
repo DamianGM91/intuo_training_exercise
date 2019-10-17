@@ -18,7 +18,7 @@ class FridgesController < ApplicationController
 
 		fridge = Fridge.new(allowed_params)
 		if fridge.save
-			render json: {:message => "Fridge created", :data => fridge.reload}, adapter: :json
+			render json: {:message => "Fridge created.", :data => fridge.reload}, adapter: :json
 		else
 			render json: {:message => "The fridge could not be created.", :errors => fridge.errors}, adapter: :json
 		end
@@ -29,7 +29,7 @@ class FridgesController < ApplicationController
 		if allowed_params.empty?
 			render json: {:message => "No parameters were submitted in the request."}, adapter: :json
 		elsif fridge.update_attributes(allowed_params)
-			render json: {:message => "Fridge updated", :data => fridge.reload}, adapter: :json
+			render json: {:message => "Fridge updated.", :data => fridge.reload}, adapter: :json
 		else
 			render json: {:message => "The fridge could not be updated.", :errors => fridge.errors}, adapter: :json
 		end
@@ -37,7 +37,7 @@ class FridgesController < ApplicationController
 
 	def destroy
 		if Fridge.find(params[:id]).destroy
-			render json: {:message => "Fridge deleted"}, adapter: :json
+			render json: {:message => "Fridge deleted."}, adapter: :json
 		end
 	end
 
