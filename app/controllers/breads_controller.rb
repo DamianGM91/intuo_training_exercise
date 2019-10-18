@@ -12,13 +12,11 @@ class BreadsController < ApplicationController
 	end
 
 	def create
-		bread = Bread.find(params[:id])
-		if allowed_params.empty?
-			render json: {:message => "No parameters were submitted in the request."}, adapter: :json
-		elsif bread.update_attributes(allowed_params)
-			render json: {:message => "Bread updated.", :data => bread.reload}, adapter: :json
+		bread = Bread.new(allowed_params)
+		if bread.save
+			render json: {:message => "Bread created.", :data => bread.reload}, adapter: :json
 		else
-			render json: {:message => "The bread could not be updated.", :errors => bread.errors}, adapter: :json
+			render json: {:message => "The bread could not be created.", :errors => bread.errors}, adapter: :json
 		end
 	end
 
